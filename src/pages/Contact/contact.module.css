@@ -1,0 +1,130 @@
+/* Estilos principais do container */
+.contact__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 120px); 
+    background-color: transparent;/* Ajuste para o header/footer */
+  }
+  
+  /* Estilos do formulário */
+  .contact__form {
+    flex: 1;
+    padding: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+  }
+  
+  .contact__form h1 {
+    color: #232637;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Estilos dos grupos de formulário */
+  .form__group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form__group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #232637;
+    font-weight: 500;
+  }
+  
+  .form__group input,
+  .form__group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  
+  .form__group input:focus,
+  .form__group textarea:focus {
+    outline: none;
+    border-color: #8263a3;
+  }
+  
+  .form__group textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  /* Estilos do botão */
+  .btn {
+    background-color: #8263a3;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #6a4f8a;
+  }
+  
+  /* Estilos da imagem */
+  .contact__image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .contact__image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+  }
+  
+  /* Media queries para responsividade */
+  @media (max-width: 768px) {
+    .contact__container {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    .contact__form {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+    
+    .contact__image {
+      width: 100%;
+      padding: 0;
+    }
+    
+    .contact__form h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contact__form {
+      padding: 1.5rem;
+    }
+    
+    .contact__form h1 {
+      font-size: 1.8rem;
+    }
+    
+    .btn {
+      padding: 0.8rem 1.5rem;
+    }
+  }

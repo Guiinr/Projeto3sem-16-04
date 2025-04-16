@@ -1,0 +1,121 @@
+.header-pages {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header-pages nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-pages .nav__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.header-pages .nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.header-pages .nav__links a {
+  font-weight: 500;
+  color: #232637;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.header-pages .nav__links a:hover {
+  color: #8263a3;
+}
+
+.header-pages .nav__links .logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* Estilos para os ícones */
+.header-icon {
+  color: #232637;
+  transition: all 0.3s ease;
+}
+
+.header-icon:hover {
+  color: #8263a3;
+  transform: scale(1.1);
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.auth-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Estilo para o ícone de usuário quando logado */
+.header-pages .nav__links .auth-link .header-icon[aria-label="Perfil"] {
+  color: #8263a3; /* Cor diferente quando logado */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .header-pages .nav__links {
+    gap: 1rem;
+  }
+  
+  .header-pages .nav__links .logo {
+    font-size: 1.2rem;
+  }
+  
+  .header-icon {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-pages nav {
+    height: auto;
+    padding: 10px 0;
+  }
+  
+  .header-pages .nav__container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .header-pages .nav__links {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .header-pages .nav__links:last-child {
+    justify-content: flex-end;
+  }
+}
