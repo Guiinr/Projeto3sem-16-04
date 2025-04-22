@@ -9,7 +9,7 @@ import Shop from './pages/Shop/Shop';
 import Contact from './pages/Contact';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
-import './App.css';
+import Orders from './pages/Orders/Orders';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -32,6 +32,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/my-orders" element={<Orders />} />
           </Routes>
         </main>
 

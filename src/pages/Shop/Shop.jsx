@@ -4,7 +4,7 @@ import styles from './Shop.module.css';
 const Shop = () => {
   // Lista de produtos
   const products = [
-    { id: 1, name: "Produto 1", price: "R$ 99,99", image: "assets/arte.png", category: "arte-digital" },
+    { id: 1, name: "Produto 1", price: "R$ 99,99", image: "<div styleName={} />public/", category: "arte-digital" },
     { id: 2, name: "Produto 2", price: "R$ 149,99", image: "images/product2.jpg", category: "pintura" },
     { id: 3, name: "Produto 3", price: "R$ 199,99", image: "images/product3.jpg", category: "fotografia" },
     { id: 4, name: "Produto 4", price: "R$ 249,99", image: "images/product4.jpg", category: "escultura" },
@@ -26,13 +26,11 @@ const Shop = () => {
     { id: 20, name: "Produto 20", price: "R$ 249,99", image: "images/product4.jpg", category: "escultura" },
   ];
 
-  // Configurações de paginação
-  const productsPerPage = 16;
+  const productsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [visibleProducts, setVisibleProducts] = useState([]);
 
-  // Filtra e pagina os produtos
   useEffect(() => {
     const filteredProducts = selectedCategory === "todos"
       ? products
@@ -42,7 +40,6 @@ const Shop = () => {
     const end = start + productsPerPage;
     const productsToShow = filteredProducts.slice(start, end);
 
-    // Adiciona animação aos produtos
     setVisibleProducts([]);
     const timer = setTimeout(() => {
       setVisibleProducts(productsToShow);
@@ -51,86 +48,85 @@ const Shop = () => {
     return () => clearTimeout(timer);
   }, [currentPage, selectedCategory]);
 
-  // Manipuladores de eventos
-  const handleNextPage = () => {
-    setCurrentPage(prev => prev + 1);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage(prev => prev - 1);
-  };
-
+  const handleNextPage = () => setCurrentPage(prev => prev + 1);
+  const handlePrevPage = () => setCurrentPage(prev => prev - 1);
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setCurrentPage(1);
   };
 
-  // Verifica se há próxima página
   const filteredProducts = selectedCategory === "todos"
     ? products
     : products.filter(product => product.category === selectedCategory);
   const hasNextPage = (currentPage * productsPerPage) < filteredProducts.length;
 
   return (
-    <>
-     
-      <main className={styles.shop__container}>
-        {/* Subtítulo e select de filtro */}
-        <div className={styles.shop__header}>
-          <h2>Nossas Artes</h2>
+    <main className={styles.shop}>
+      <div className={styles.shopHeader}>
+        <h1 className={styles.shopTitle}>Nossa Galeria</h1>
+        <p className={styles.shopSubtitle}>Descubra obras exclusivas para seu espaço</p>
+        
+        <div className={styles.filterContainer}>
           <select 
-            className={styles.filter__select} 
-            id="filterSelect"
+            className={styles.filterSelect} 
             value={selectedCategory}
             onChange={handleCategoryChange}
           >
-            <option value="todos">Todos</option>
+            <option value="todos">Todas Categorias</option>
             <option value="arte-digital">Arte Digital</option>
             <option value="pintura">Pintura</option>
             <option value="fotografia">Fotografia</option>
             <option value="escultura">Escultura</option>
           </select>
         </div>
-      
-        {/* Lista de produtos */}
-        <section className={styles.products__grid} id="productsGrid">
-          {visibleProducts.map((product, index) => (
-            <div 
-              key={product.id} 
-              className={`${styles.product__card} ${styles.visible}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p className={styles.product__price}>{product.price}</p>
-              <button className={styles.btn}>Adicionar ao Carrinho</button>
-            </div>
-          ))}
-        </section>
-      
-        {/* Botões de paginação */}
-        <div className={styles.pagination}>
-          <button 
-            id="prevPage" 
-            className={styles.pagination__btn} 
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
-          <span id="pageInfo">Página {currentPage}</span>
-          <button 
-            id="nextPage" 
-            className={styles.pagination__btn}
-            onClick={handleNextPage}
-            disabled={!hasNextPage}
-          >
-            Próximo
-          </button>
-        </div>
-      </main>
+      </div>
 
-    </>
+      <div className={styles.productsGrid}>
+        {visibleProducts.map((product, index) => (
+          <div 
+            key={product.id} 
+            className={`${styles.productCard} ${styles.visible}`}
+            style={{ transitionDelay: `${index * 50}ms` }}
+          >
+            <div className={styles.productImageContainer}>
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className={styles.productImage}
+                onError={(e) => {
+                  e.target.src = '/assets/placeholder-art.jpg'; // Imagem fallback
+                }}
+              />
+              <button className={styles.addToCartBtn}>
+                <i className="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+            <div className={styles.productInfo}>
+              <h3>{product.name}</h3>
+              <span className={styles.productPrice}>{product.price}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.pagination}>
+        <button 
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          className={styles.paginationBtn}
+        >
+          <i className="fas fa-chevron-left"></i> Anterior
+        </button>
+        <span className={styles.pageNumber}>Página {currentPage}</span>
+        <button 
+          onClick={handleNextPage}
+          disabled={!hasNextPage}
+          className={styles.paginationBtn}
+        >
+          Próxima <i className="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </main>
   );
 };
 
