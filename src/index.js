@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 
 // Importações de CSS globais
 import './styles/globals.css';       // Estilos globais e variáveis
-import './styles/animations.css';    // Animações e keyframes
 
 // Importe o CSS do Font Awesome se estiver usando
 import 'remixicon/fonts/remixicon.css';
